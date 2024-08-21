@@ -5,7 +5,9 @@ const {hideBin} = require("yargs/helpers")
 const {initrepo} = require("./controller/init")
 const {addrepo} = require("./controller/add")
 const {commitrepo} = require("./controller/commit")
-const {pushrepo } = require("./controller/push")
+const {pushrepo } = require("./controller/push");
+const { pullrepo } = require("./controller/pull");
+const { revertrepo } = require("./controller/revert");
 
 yargs(hideBin(process.argv))
 .command(
@@ -40,6 +42,24 @@ yargs(hideBin(process.argv))
                 "Pushing file to staging area" ,
             {},
             pushrepo
+        )
+        .command(
+            "pull" ,
+            "pulling your reposotory " ,
+            {},
+            pullrepo
+        )
+        .command(
+            "revert <commitID>",
+            "Reverting your reposetory",
+            (yargs) => {
+                yargs.positional("commitID" , {
+                    description : "file reverted from the staging area",
+                    type : "string"
+                })
+            },
+            revertrepo    
+
         )
     
     .demandCommand(1, "you need atleast one command").help().argv;
