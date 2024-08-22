@@ -25,7 +25,9 @@ yargs(hideBin(process.argv))
                 type : "string"
             })
          } ,
-        addrepo
+        (argv) => {
+            addrepo(argv.file)
+        }
         )
         .command(
             "commit <message>" , 
