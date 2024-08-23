@@ -38,7 +38,9 @@ yargs(hideBin(process.argv))
                     type : "string"
                 })
              } ,
-            commitrepo
+             (argv) => {
+                commitrepo(argv.message)
+            }
             )
             .command("push" , 
                 "Pushing file to staging area" ,
